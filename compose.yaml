@@ -1,0 +1,30 @@
+# REVIEW-ONLY DEPLOYMENT SCAFFOLD
+#
+# This file is intentionally not a runnable production configuration.
+# PKP container images have version-specific entrypoints, volume layouts,
+# and configuration requirements. Do not guess these when handling
+# private manuscript files. Complete the PKP-specific image configuration
+# and verify its file storage is NOT web-accessible before deploying.
+#
+# The journal must remain a separate Compose project from Correlia.
+#
+# Intended topology:
+#
+#   correlia-caddy --journal_proxy--> ojs-web --journal_internal--> ojs-db
+#
+# Keep all OJS/database mounts private and persistent.
+# Do not publish database or OJS service ports to the host.
+#
+# Reference:
+# https://github.com/pkp/containers
+#
+# Example network definitions for a completed Compose file:
+networks:
+  journal_proxy:
+    external: true
+    name: journal_proxy
+  journal_internal:
+    internal: true
+
+# Services will be added after selecting and checking an exact
+# upstream-supported OJS container image and its storage contract.
